@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+* {
+    margin: 0;padding: 0;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style:none;
+}
+body {
+    font-size: 14px; font-family:Arial, sans-serif;
+}
+.nav {
+    width:200px ;
+}
+.nav > li > a {
+    display: block;
+    background-color: #000;
+    color:#fff;
+    border-bottom: 1px solid #efefef;
+    text-align: center;
+    line-height: 40px;
+}
+.nav > li > a:hover {
+    color:red;
+}
+.submenu {
+    height: 0;
+    overflow: hidden; /* 숨기기 */
+    transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -webkit-transition-duration: 0.5s;
+    -ms-transition-duration: 0.5s;
+}
+
+.submenu li a {
+    display: block;
+    background-color: #999;
+    text-align: center;
+    line-height: 40px;
+    border-bottom: 1px solid #d19191;
+    color:#000;
+}
+
+.submenu li a:hover {
+    background-color: yellow;
+    color: pink;
+}
+
+.nav > li > a:hover + .submenu {
+    height: 164px;
+}

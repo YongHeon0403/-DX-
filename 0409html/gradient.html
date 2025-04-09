@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-shadow: -5px -2px 10px red; /* text-shadow: x축 y축 퍼짐 */
+            box-shadow: 10px 5px 10px blue;
+        }
+        .box2 {
+            -webkit-box-shadow: 5px 10px 10px 5px #79FF2B;
+            box-shadow: 5px 10px 10px 5px #79FF2B;
+        }
+        .box3 {
+            text-shadow: 10px 5px 5px #ff6969;
+        }
+        .box4 {
+            box-shadow: inset 10px 5px 10px blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>text-shadow 효과 주기 </h1>
+    <div class ="box1">box-shadow에 outset </div>
+    <div class ="box2">box-shadow에 inset </div>
+    <div class ="box3">background에 linear 복사하기 </div>
+    <div class ="box4">background에 radial-gradient </div>
+</body>
+</html>
