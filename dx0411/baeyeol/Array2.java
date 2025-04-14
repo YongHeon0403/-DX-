@@ -9,16 +9,19 @@ public class Array2 {
 
         while (true) {
             System.out.println("----------------------------");
-            for (int i=0; i<SIZE; i++)
-                System.out.print(i+1 + " ");
+            for (int i = 0; i < SIZE; i++)
+                System.out.print(i + 1 + " ");
+
             System.out.println("\n----------------------------");
-            for (int i=0; i<SIZE; i++)
+            for (int i = 0; i < SIZE; i++)
                 System.out.print(seats[i] + " ");
+
             System.out.println("\n----------------------------");
 
             System.out.print("원하시는 좌석번호를 입력하세요(종료는 -1): ");
             Scanner scan = new Scanner(System.in);
             int s = scan.nextInt();
+
             if (s == -1)
                 break;
             if (seats[s-1] == 0) {

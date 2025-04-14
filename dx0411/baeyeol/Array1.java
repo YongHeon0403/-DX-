@@ -17,6 +17,7 @@ public class Array1 {
                 break;
             }
         }
+
         if (index < s.length && index >= 0)
             System.out.println("" + value + "값은" + index + "위치에 있습니다.");
     }

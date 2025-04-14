@@ -31,12 +31,14 @@ public class Customer {
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
+
     public String getCustomerName() {
         return customerName;
     }
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
+
     public String getCustomerGrade() {
         return customerGrade;
     }

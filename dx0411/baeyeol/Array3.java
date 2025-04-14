@@ -9,6 +9,7 @@ public class Array3 {
                 ,{40,40,40}
                 ,{50,50,50}
         };
+
         int korTotal = 0, engTotal = 0, matTotal = 0;
         System.out.println("번호  국어  영어  수학  총점  평균");
         System.out.println("==============================");
