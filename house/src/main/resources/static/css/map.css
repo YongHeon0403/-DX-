@@ -1,0 +1,129 @@
+/* --- 기본 설정 --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    overflow: hidden; /* 페이지 스크롤 방지 */
+}
+
+/* --- 전체 레이아웃 컨테이너 --- */
+.map-container {
+    display: flex;
+    width: 100%;
+    height: 100%; /* 부모(content-container)의 높이를 100% 사용 */
+}
+
+/* --- 왼쪽 패널 (사이드바 + 리스트) --- */
+.panel-left {
+    width: 440px;
+    height: 100%;
+    display: flex;
+    flex-shrink: 0;
+    border-right: 1px solid #e0e0e0;
+    background-color: #fff;
+}
+
+/* --- 왼쪽의 세로 아이콘 메뉴 (사이드바) --- */
+.sidebar {
+    width: 70px;
+    height: 100%;
+    background-color: #f8f9fa;
+    border-right: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.sidebar-menu li {
+    padding: 15px 0;
+    cursor: pointer;
+    font-size: 13px;
+    color: #555;
+}
+.sidebar-menu li.active {
+    background-color: #fff;
+    color: #007aff;
+    font-weight: bold;
+}
+.sidebar-menu li .icon {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* --- 매물 리스트 패널 --- */
+.listing-panel {
+    width: 370px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.listing-header {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.listing-header button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 20px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* 매물 아이템 스크롤 영역 */
+.listing-items {
+    flex-grow: 1;
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+}
+
+/* 개별 매물 카드 */
+.listing-card {
+    display: flex;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+.listing-card:hover {
+    background-color: #f8f9fa;
+}
+.listing-card .image {
+    width: 120px;
+    height: 120px;
+    background-color: #eee;
+    border-radius: 8px;
+    margin-right: 15px;
+    /* 실제로는 img 태그를 사용합니다 */
+}
+/* 사이드바 이미지 카드 속의 img 태그가 부모 div를 꽉 채우도록 설정 */
+.listing-card .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 잘리더라도 비율을 유지하며 꽉 채움 */
+  display: block;
+}
+.listing-card .info h3 {
+    font-size: 18px;
+    margin: 0 0 8px;
+}
+.listing-card .info p {
+    font-size: 14px;
+    margin: 4px 0;
+    color: #555;
+}
+
+
+/* --- 오른쪽 지도 영역 --- */
+.map-area {
+    flex-grow: 1; /* 남은 공간을 모두 차지 */
+    height: 100%;
+}
+#map {
+    width: 100%;
+    height: 100%;
+}

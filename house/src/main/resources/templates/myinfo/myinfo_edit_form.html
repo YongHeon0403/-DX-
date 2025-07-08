@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>회원 정보 수정</title>
+</head>
+<th:block layout:fragment="content">
+    <div class="form-container">
+        <h1>회원 정보 수정</h1>
+
+        <div th:if="${error}" class="form-error" th:text="${error}"></div>
+        <div th:if="${success}" th:text="${success}" style="color: blue; text-align: center; margin-bottom: 15px;"></div>
+
+        <div class="form-group">
+            <label for="username">아이디</label>
+            <input type="text" id="username" name="username" th:value="${user.username}" readonly style="background-color: #e9ecef;">
+        </div>
+
+        <form th:action="@{/user/myinfo/edit}" method="post">
+            <div class="form-group">
+                <label for="newPassword">새 비밀번호</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">새 비밀번호 확인</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit" class="form-btn">비밀번호 변경</button>
+        </form>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>메인</title>
+</head>
+<body>
+<main class="main-content" layout:fragment="content">
+
+    <section class="hero-section">
+        <div class="hero-text">
+            <h1>내일의 집, 오늘 찾아보세요</h1>
+            <p>가장 빠르고 정확한 부동산 정보</p>
+        </div>
+    </section>
+
+    <section class="search-section">
+        <div class="search-bar">
+            <input type="text" placeholder="지역, 지하철, 대학, 단지명 또는 매물번호를 입력해주세요.">
+        </div>
+    </section>
+
+    <section class="services-grid">
+        <a href="/map?type=원룸/투룸" class="card-link">
+            <article class="card">
+                <div>
+                    <h2>원/투룸</h2>
+                    <p>주택/빌라, 오피스텔, 아파트까지<br>모든 전월세 매물을 한번에!</p>
+                </div>
+                <div class="icon">🏠</div>
+            </article>
+        </a>
+        <a href="/map?type=아파트" class="card-link">
+            <article class="card">
+                <div>
+                    <h2>아파트</h2>
+                    <p>가장 빠른 실거래가 알림!<br>풍부한 단지정보 및 실시간 랭킹까지!</p>
+                </div>
+                <div class="icon">🏢</div>
+            </article>
+        </a>
+        <a href="/map?type=주택/빌라" class="card-link">
+            <article class="card">
+                <div>
+                    <h2>주택/빌라</h2>
+                    <p>전월세부터 매매까지<br>모든 매물!</p>
+                </div>
+                <div class="icon">🏡</div>
+            </article>
+        </a>
+        <a href="/map?type=오피스텔" class="card-link">
+            <article class="card">
+                <div>
+                    <h2>오피스텔</h2>
+                    <p>다양한 정보와<br>다양한 매물!</p>
+                </div>
+                <div class="icon">🏙️</div>
+            </article>
+        </a>
+        <a href="/map?type=분양" class="card-link">
+            <article class="card">
+                <div>
+                    <h2>분양</h2>
+                    <p>전국의 모든<br>분양/입주 정보<br>확인 가능!</p>
+                </div>
+                <div class="icon">🚧</div>
+            </article>
+        </a>
+        <a href="#" class="card-link">
+            <article class="card">
+                <div>
+                    <h2>준비중</h2>
+                    <p>새로운 서비스가<br>준비중입니다!</p>
+                </div>
+                <div class="icon">✨</div>
+            </article>
+        </a>
+    </section>
+
+    <section class="featured-listings">
+        <h2 class="section-title">추천 매물</h2>
+        <div class="listing-grid">
+            <a th:each="room : ${featuredRooms}" th:href="@{'/room/' + ${room.id}}" class="card-link">
+                <div class="listing-card">
+                    <div class="listing-image"
+                         th:style="${not #lists.isEmpty(room.images)}
+                                ? 'background-image: url(/uploads/' + ${room.images[0].imageName} + ')'
+                                : 'background-image: url(/images/default-placeholder.png)'">
+                    </div>
+                    <div class="listing-info">
+                        <h3 class="listing-title" th:text="${room.title}">매물 제목</h3>
+                        <p class="listing-price" th:text="${room.price} + '만원'">가격</p>
+                        <p class="listing-location" th:text="${room.address}">주소</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer class="page-footer-section" style="margin-top: 80px;">
+        <div class="footer-content">
+            <div class="footer-logo">부동산</div>
+            <div class="footer-info">
+                <p>(주)부동산 | 대표: 이용헌 | 사업자등록번호: 010-5674-1915</p>
+                <p>주소: 대구광역시 테헤란로 123 | 고객센터: 1588-0000</p>
+                <p class="copyright">© House Corp. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">회사소개</a> | <a href="#">이용약관</a> | <a href="#">개인정보처리방침</a>
+            </div>
+        </div>
+    </footer>
+
+</main>
+</body>
+</html>

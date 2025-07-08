@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>매물 등록</title>
+</head>
+
+<th:block layout:fragment="content">
+    <div class="form-container wide">
+        <h1>방 내놓기</h1>
+
+        <form th:action="@{/room/new}" method="post" enctype="multipart/form-data">
+
+            <h2>기본 정보</h2>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" placeholder="예: 매매 4억 2,000만원" required>
+            </div>
+            <div class="form-group">
+                <label for="imageFiles">매물 사진 (여러 장 선택 가능)</label>
+                <input type="file" id="imageFiles" name="imageFiles" multiple>
+            </div>
+
+            <hr style="margin: 30px 0;">
+
+            <h2>매물 정보</h2>
+            <div class="form-grid">
+                <label for="type">매물종류</label>
+                <select id="type" name="type" class="form-select" required>
+                    <option value="원룸/투룸">원/투룸</option>
+                    <option value="아파트">아파트</option>
+                    <option value="주택/빌라">주택/빌라</option>
+                    <option value="오피스텔">오피스텔</option>
+                    <option value="분양">분양</option>
+                </select>
+
+                <label for="address">소재지</label>
+                <div class="address-group">
+                    <input type="text" id="address" name="address" required>
+                    <button type="button" id="address-search-btn" class="form-btn">주소 검색</button>
+                </div>
+
+                <label for="latitude">위도</label>
+                <input type="text" id="latitude" name="latitude" readonly required>
+
+                <label for="longitude">경도</label>
+                <input type="text" id="longitude" name="longitude" readonly required>
+
+                <label for="contractArea">계약면적(m²)</label>
+                <input type="number" step="0.01" id="contractArea" name="contractArea">
+
+                <label for="exclusiveArea">전용면적(m²)</label>
+                <input type="number" step="0.01" id="exclusiveArea" name="exclusiveArea">
+
+                <label for="usageRatio">전용률(%)</label>
+                <input type="number" step="0.01" id="usageRatio" name="usageRatio">
+
+                <label for="buildingScale">규모</label>
+                <input type="text" id="buildingScale" name="buildingScale">
+
+                <label for="moveInDate">입주가능일</label>
+                <input type="text" id="moveInDate" name="moveInDate" placeholder="예: 즉시입주(협의가능)">
+
+                <label for="numberOfRooms">방수</label>
+                <input type="number" id="numberOfRooms" name="numberOfRooms">
+
+                <label for="numberOfBathrooms">욕실수</label>
+                <input type="number" id="numberOfBathrooms" name="numberOfBathrooms">
+
+                <label for="direction">방향</label>
+                <input type="text" id="direction" name="direction">
+
+                <label for="internalStructure">내부구조</label>
+                <input type="text" id="internalStructure" name="internalStructure">
+
+                <label for="veranda">베란다</label>
+                <input type="text" id="veranda" name="veranda">
+
+                <label for="heatingType">난방시설</label>
+                <input type="text" id="heatingType" name="heatingType">
+
+                <label for="elevator">승강시설</label>
+                <input type="text" id="elevator" name="elevator">
+
+                <label for="parking">주차시설</label>
+                <input type="text" id="parking" name="parking">
+            </div>
+
+            <hr style="margin: 30px 0;">
+
+            <h2>가격 정보</h2>
+            <div class="form-grid">
+                <label for="price">매매가(만원)</label>
+                <input type="number" id="price" name="price">
+                <label for="loan">융자금(원)</label>
+                <input type="number" id="loan" name="loan" value="0">
+            </div>
+
+            <hr style="margin: 30px 0;">
+
+            <h2>매물 설명</h2>
+            <div class="form-group">
+                <label for="description">설명</label>
+                <textarea id="description" name="description" rows="8" style="width: 100%; resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" class="form-btn" style="margin-top: 20px;">등록하기</button>
+
+        </form>
+    </div>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoAppKey} + '&libraries=services'}"></script>
+    <script>
+        // --- 1. 주소 검색 버튼 이벤트 ---
+        document.getElementById('address-search-btn').addEventListener('click', function() {
+            var geocoder = new kakao.maps.services.Geocoder();
+            var address = document.getElementById('address').value;
+
+            geocoder.addressSearch(address, function(result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    document.getElementById('latitude').value = result[0].y;
+                    document.getElementById('longitude').value = result[0].x;
+                    alert('좌표가 성공적으로 변환되었습니다.');
+                } else {
+                    alert('주소 검색에 실패했습니다. 주소를 다시 확인해주세요.');
+                }
+            });
+        });
+
+        // --- 2. 폼 제출 이벤트 ---
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const roomData = {};
+            formData.forEach((value, key) => {
+                if (key !== 'imageFiles') {
+                    roomData[key] = value;
+                }
+            });
+
+            const requestData = new FormData();
+            requestData.append('roomData', new Blob([JSON.stringify(roomData)], { type: "application/json" }));
+
+            const imageFileInput = document.getElementById('imageFiles');
+            if (imageFileInput.files.length > 0) {
+                for (const file of imageFileInput.files) {
+                    requestData.append('imageFiles', file);
+                }
+            }
+
+            fetch(form.action, {
+                method: 'POST',
+                body: requestData
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/map';
+                } else {
+                    alert('등록에 실패했습니다. 서버 로그를 확인해주세요.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('등록 중 오류가 발생했습니다.');
+            });
+        });
+    </script>
+</th:block>
+
+</html>

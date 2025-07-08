@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>지도에서 방 찾기</title>
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/css/map.css">
+    </th:block>
+</head>
+<body>
+<div class="map-container" layout:fragment="content">
+    <aside class="panel-left">
+        <nav class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="active" data-type="원룸/투룸">
+                    <span class="icon">🏠</span>
+                    원/투룸
+                </li>
+                <li data-type="아파트">
+                    <span class="icon">🏢</span>
+                    아파트
+                </li>
+                <li data-type="주택/빌라">
+                    <span class="icon">🏡</span>
+                    주택/빌라
+                </li>
+                <li data-type="오피스텔">
+                    <span class="icon">🏙️</span>
+                    오피스텔
+                </li>
+                <li data-type="분양">
+                    <span class="icon">🚧</span>
+                    분양
+                </li>
+            </ul>
+        </nav>
+        <section class="listing-panel">
+            <div class="listing-header">
+                <button>필터</button>
+            </div>
+            <div class="listing-items">
+            </div>
+        </section>
+    </aside>
+
+    <main class="map-area">
+        <div id="map"></div>
+    </main>
+</div>
+
+<th:block layout:fragment="script">
+    <script type="text/javascript" th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + ${kakaoAppKey}}"></script>
+    <script src="/js/map.js"></script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">부동산</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <th:block layout:fragment="css"></th:block>
+
+</head>
+<body>
+<header th:replace="~{fragments/header :: headerFragment}"></header>
+
+<div class="content-container">
+    <th:block layout:fragment="content"></th:block>
+</div>
+
+<th:block layout:fragment="script"></th:block>
+
+</body>
+</html>
